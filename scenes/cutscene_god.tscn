@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckaee0raxh1sf"]
+
+[ext_resource type="PackedScene" uid="uid://df41op1j5b67q" path="res://scenes/entities/player/player.tscn" id="1_u7w20"]
+[ext_resource type="PackedScene" uid="uid://dxv46k0neica5" path="res://scenes/entities/god/god.tscn" id="2_elhar"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w5avt"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_blk4h"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w16um"]
+size = Vector3(1, 10, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s6mrd"]
+size = Vector3(16, 10, 1)
+
+[sub_resource type="Environment" id="Environment_lkenm"]
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
+fog_density = 0.05
+volumetric_fog_density = 0.1787
+
+[node name="CutsceneGod" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("PlaneMesh_w5avt")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("WorldBoundaryShape3D_blk4h")
+
+[node name="Walls" type="StaticBody3D" parent="."]
+
+[node name="Wall1" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, 0)
+shape = SubResource("BoxShape3D_w16um")
+
+[node name="Wall2" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, 0)
+shape = SubResource("BoxShape3D_w16um")
+
+[node name="Wall3" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 8)
+shape = SubResource("BoxShape3D_s6mrd")
+
+[node name="Wall4" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -8)
+shape = SubResource("BoxShape3D_s6mrd")
+
+[node name="Player" parent="." instance=ExtResource("1_u7w20")]
+
+[node name="God" parent="." instance=ExtResource("2_elhar")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 3, -10)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lkenm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.890626, -0.156275, -0.427041, 0.454737, 0.306072, 0.836382, 0, -0.939094, 0.34366, 0, 0, 0)
