@@ -2,6 +2,7 @@ extends CharacterBody3D
 class_name Player
 
 @onready var HEAD := $Head
+@onready var ANIMATION_PLAYER: AnimationPlayer = $AnimationPlayer
 
 @export var MOUSE_SENSITIVITY = 0.2
 @export var JUMP_POWER = 4
@@ -11,6 +12,10 @@ class_name Player
 @export var GRAVITY = Vector3(0, -9.8, 0)
 
 var direction := Vector2()
+
+func _on_animation_finished(anim_name: StringName):
+	if anim_name == "crouch" && Input.is_action_pressed("move_crouch"):
+		ANIMATION_PLAYER.play("crouch_idle")
 
 func _ready():
 	GlobalVars.current_player = self
@@ -22,6 +27,13 @@ func _physics_process(delta):
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if Input.is_action_just_pressed("move_crouch"):
+		ANIMATION_PLAYER.play("crouch")
+	elif Input.is_action_just_released("move_crouch"):
+		var crouch_progress = ANIMATION_PLAYER.current_animation_position
+		ANIMATION_PLAYER.play("uncrouch")
+		ANIMATION_PLAYER.seek(0.4 - crouch_progress * 4, true)
 
 	direction = Input.get_vector("strafe_left", "strafe_right", "move_backward", "move_forward")
 
@@ -45,8 +57,11 @@ func _physics_process(delta):
 	var target = move_direction * WALK_SPEED
 	var acceleration = ACCELERATE
 
-	if move_direction.dot(horizontal_velocity) <= 0: # attempting to move opposite to horizontal velocity
-		acceleration = DECELERATE
+
+	if move_direction == Vector3.ZERO && !is_on_floor():
+		acceleration = 0 # don't decelerate in mid-air
+	elif move_direction.dot(horizontal_velocity) <= 0: 
+		acceleration = DECELERATE # attempting to move opposite to horizontal velocity
 
 	velocity = velocity.move_toward(target, acceleration * delta);
 	velocity.y = vertical_velocity

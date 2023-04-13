@@ -21,7 +21,7 @@ fog_light_color = Color(1, 1, 1, 1)
 fog_density = 0.05
 volumetric_fog_density = 0.1787
 
-[node name="CutsceneGod" type="Node3D"]
+[node name="Intro" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
 
