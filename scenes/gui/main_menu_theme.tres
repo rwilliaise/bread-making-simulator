@@ -1,0 +1,61 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b67nxj3grepel"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h76lx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+skew = Vector2(0.75, 0)
+border_width_left = 5
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7lr7"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+skew = Vector2(0.75, 0)
+border_width_left = 8
+border_width_top = 5
+border_width_right = 8
+border_width_bottom = 5
+border_color = Color(1, 0.7625, 0.25, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cyq6q"]
+bg_color = Color(0.4, 0.27451, 0.0823529, 1)
+skew = Vector2(0.75, 0)
+border_width_left = 5
+corner_detail = 1
+shadow_size = 1
+shadow_offset = Vector2(2.5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lirij"]
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.521569, 0.396078, 0.129412, 1)
+skew = Vector2(0.75, 0)
+border_width_left = 5
+corner_detail = 1
+shadow_size = 1
+shadow_offset = Vector2(2.5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sxnbg"]
+bg_color = Color(0.521569, 0.396078, 0.129412, 1)
+skew = Vector2(0.75, 0)
+border_width_left = 5
+corner_detail = 1
+shadow_size = 1
+shadow_offset = Vector2(2.5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3syy"]
+bg_color = Color(0.25098, 0.25098, 0.25098, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_4b4o1"]
+font_names = PackedStringArray("Franklin Gothic Medium", "Arial", "Sans-Serif")
+multichannel_signed_distance_field = true
+
+[resource]
+default_font = SubResource("SystemFont_4b4o1")
+Button/colors/font_outline_color = Color(1, 1, 1, 0)
+Button/font_sizes/font_size = 24
+Button/styles/disabled = SubResource("StyleBoxFlat_h76lx")
+Button/styles/focus = SubResource("StyleBoxFlat_w7lr7")
+Button/styles/hover = SubResource("StyleBoxFlat_cyq6q")
+Button/styles/normal = SubResource("StyleBoxFlat_lirij")
+Button/styles/pressed = SubResource("StyleBoxFlat_sxnbg")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_r3syy")

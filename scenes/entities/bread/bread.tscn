@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://2ge7pa6nouda"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8n6s5"]
+friction = 0.6
+rough = true
+bounce = 0.05
+absorbent = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g7k8h"]
+margin = 0.1
+height = 0.25
+radius = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_4lfgw"]
+radius = 0.25
+height = 0.25
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7tu7d"]
+albedo_color = Color(1, 0.890196, 0.65098, 1)
+
+[node name="Bread" type="RigidBody3D"]
+mass = 0.2
+physics_material_override = SubResource("PhysicsMaterial_8n6s5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_g7k8h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_4lfgw")
+surface_material_override/0 = SubResource("StandardMaterial3D_7tu7d")

@@ -1,0 +1,35 @@
+
+                           BREAD MAKING SIMULATOR III
+                                   GRAND PLAN
+
+  Introduction
+
+    Bread Making Simulator III is a game about making bread for God. The basic
+    process to create bread is the following:
+
+ Collect wheat -> Smash wheat into flour -> Wash flour into dough -> Cook dough
+                         into bread -> Serve God bread
+
+    Wheat can be grown on grasslands. Flour can be first created in the players
+    inventory by utilizing an interactive UI to smash the wheat material into
+    flour material. Dough can be created by putting flour in water 
+
+  Technology Tree
+
+    There will be several tiers of technology, which correspond to certain
+    points in the game, such as early-game, late-game, and so on. The stages of
+    the game correlate to your relationship with God.
+
+    The tiers are defined as follows:
+
+      1 BREAD
+        All machines are made out of hardened bread. Other materials are
+        difficult to get during this first stage.
+
+        Features for BREAD stage:
+        
+          - Bread golems summoned through some ritualistic means, which can
+            allow for easy automation for basic tasks.
+          - Pocket universes through similarly summoned rituals.
+
+      2 

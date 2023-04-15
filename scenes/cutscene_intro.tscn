@@ -60,3 +60,5 @@ environment = SubResource("Environment_lkenm")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.890626, -0.156275, -0.427041, 0.454737, 0.306072, 0.836382, 0, -0.939094, 0.34366, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
