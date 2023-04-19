@@ -5,10 +5,10 @@ class_name Player
 @onready var ANIMATION_PLAYER: AnimationPlayer = $AnimationPlayer
 
 @export var MOUSE_SENSITIVITY = 0.2
-@export var JUMP_POWER = 4
+@export var JUMP_POWER = 5
 @export var WALK_SPEED = 8
 @export var ACCELERATE = 10
-@export var DECELERATE = 15
+@export var DECELERATE = 25
 @export var GRAVITY = Vector3(0, -9.8, 0)
 
 var direction := Vector2()
@@ -18,7 +18,7 @@ func _on_animation_finished(anim_name: StringName):
 		ANIMATION_PLAYER.play("crouch_idle")
 
 func _ready():
-	GlobalVars.current_player = self
+	Global.current_player = self
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta):
@@ -76,5 +76,6 @@ func _input(event: InputEvent):
 		rot.x = clamp(rot.x, -89, 89)
 
 		HEAD.rotation_degrees = rot
-	if event is InputEventMouseButton:
+	if event is InputEventMouseButton && Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		get_viewport().set_input_as_handled()

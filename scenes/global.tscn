@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3mx3o1qrlyd3"]
+
+[ext_resource type="Script" path="res://scenes/global.gd" id="1_nia8h"]
+[ext_resource type="Theme" uid="uid://b67nxj3grepel" path="res://scenes/gui/main_menu_theme.tres" id="2_rp5n2"]
+[ext_resource type="Script" path="res://scripts/smooth_progress_bar.gd" id="3_mrjdv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oh7cc"]
+shadow_size = 8
+shadow_color = Color(0, 0, 0, 0.596078)
+
+[node name="Global" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_nia8h")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 76.0
+offset_top = -9.5
+offset_right = -76.0
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_rp5n2")
+max_value = 1.0
+script = ExtResource("3_mrjdv")
+
+[node name="Protip" type="Label" parent="ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_rp5n2")
+text = "PRO TIP:"
+label_settings = SubResource("LabelSettings_oh7cc")
+horizontal_alignment = 1
+vertical_alignment = 1

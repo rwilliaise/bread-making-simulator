@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw2aqbipanjrs"]
+
+[ext_resource type="PackedScene" uid="uid://chxgio2f47ivx" path="res://models/synthesizer.blend" id="1_uhd4p"]
+
+[node name="SynthesizerComponent" type="StaticBody3D"]
+
+[node name="synthesizer" parent="." instance=ExtResource("1_uhd4p")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]

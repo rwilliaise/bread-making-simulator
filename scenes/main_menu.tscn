@@ -1,37 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://bi8uxfj1868os"]
+[gd_scene load_steps=10 format=3 uid="uid://bi8uxfj1868os"]
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_auhel"]
 [ext_resource type="Theme" uid="uid://b67nxj3grepel" path="res://scenes/gui/main_menu_theme.tres" id="1_lhsvp"]
-[ext_resource type="Texture2D" uid="uid://bpcqqm7474qo8" path="res://textures/grass.tres" id="2_5d5ds"]
 [ext_resource type="PackedScene" uid="uid://2ge7pa6nouda" path="res://scenes/entities/bread/bread.tscn" id="2_w4p8d"]
+[ext_resource type="Material" uid="uid://cerqj1qmrwc1s" path="res://scenes/grass_material.tres" id="3_yjeqe"]
 [ext_resource type="Environment" uid="uid://bjymjchd4rq78" path="res://scenes/default_environment.tres" id="5_nnoy7"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_prj7q"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gfhps"]
-noise_type = 2
-frequency = 0.17
-fractal_octaves = 1
-cellular_jitter = 1.5
-domain_warp_enabled = true
-domain_warp_type = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gttt4"]
-width = 1024
-height = 1024
-seamless = true
-as_normal_map = true
-bump_strength = 2.0
-noise = SubResource("FastNoiseLite_gfhps")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p8v6"]
-albedo_texture = ExtResource("2_5d5ds")
-albedo_texture_force_srgb = true
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_gttt4")
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_6bcin"]
-material = SubResource("StandardMaterial3D_3p8v6")
+material = ExtResource("3_yjeqe")
 size = Vector2(64, 64)
 
 [sub_resource type="SystemFont" id="SystemFont_prxe8"]
@@ -94,33 +72,6 @@ size_flags_vertical = 0
 [node name="Play" type="Button" parent="CanvasLayer/MenuUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "play the game"
-
-[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
-visible = false
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 26.0
-offset_top = -13.5
-offset_right = -26.0
-offset_bottom = 13.5
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_lhsvp")
-max_value = 1.0
-
-[node name="Protip" type="Label" parent="CanvasLayer/ProgressBar"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 35.0
-offset_bottom = 35.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
