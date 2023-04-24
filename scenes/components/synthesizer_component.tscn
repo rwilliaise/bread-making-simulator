@@ -1,9 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw2aqbipanjrs"]
+[gd_scene load_steps=5 format=3 uid="uid://bw2aqbipanjrs"]
 
-[ext_resource type="PackedScene" uid="uid://chxgio2f47ivx" path="res://models/synthesizer.blend" id="1_uhd4p"]
+[ext_resource type="Script" path="res://scenes/components/synthesizer_component.gd" id="1_tnyfl"]
+[ext_resource type="PackedScene" uid="uid://2ge7pa6nouda" path="res://scenes/entities/bread/bread.tscn" id="2_xojwg"]
+[ext_resource type="PackedScene" uid="uid://bjtimrmcxlke6" path="res://models/synthesizer.glb" id="3_0jbts"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k3okl"]
 
 [node name="SynthesizerComponent" type="StaticBody3D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_tnyfl")
+BREAD = ExtResource("2_xojwg")
 
-[node name="synthesizer" parent="." instance=ExtResource("1_uhd4p")]
+[node name="synthesizer" parent="." instance=ExtResource("3_0jbts")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_k3okl")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timeout"]

@@ -1,10 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://df41op1j5b67q"]
+[gd_scene load_steps=18 format=3 uid="uid://df41op1j5b67q"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_31a86"]
 [ext_resource type="Script" path="res://scenes/entities/player/block_library.gd" id="2_y6upx"]
 [ext_resource type="PackedScene" uid="uid://cx7ifaiiqcg5s" path="res://scenes/components/structure_component.tscn" id="3_1tjy5"]
 [ext_resource type="Material" uid="uid://b3123jm7j2jc2" path="res://shaders/outline_material.tres" id="3_g4jer"]
 [ext_resource type="Shader" path="res://shaders/glitch.gdshader" id="4_ds5rr"]
+[ext_resource type="PackedScene" uid="uid://bw2aqbipanjrs" path="res://scenes/components/synthesizer_component.tscn" id="5_orh0u"]
+[ext_resource type="Texture2D" uid="uid://doir5p6ikgc28" path="res://textures/icon/structural.png" id="7_nlr33"]
+[ext_resource type="Texture2D" uid="uid://jsu52k2aihqn" path="res://textures/icon/synthesizer.png" id="8_euj5j"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1pqyx"]
 radius = 0.4
@@ -194,6 +197,8 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+collision_layer = 2
+collision_mask = 11
 script = ExtResource("1_31a86")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
@@ -204,11 +209,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
 script = ExtResource("2_y6upx")
 HOVER_MATERIAL = ExtResource("3_g4jer")
 STRUCTURAL = ExtResource("3_1tjy5")
+SYNTHESIZER = ExtResource("5_orh0u")
 
 [node name="Camera" type="Camera3D" parent="Head"]
 
 [node name="Cast" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -6)
+collision_mask = 9
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Head"]
 
@@ -239,16 +246,37 @@ render_target_update_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Head/CanvasLayer"]
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = -1
+anchor_top = 0.9
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Head/CanvasLayer/HBoxContainer"]
 layout_mode = 2
+texture = ExtResource("7_nlr33")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Head/CanvasLayer/HBoxContainer/TextureRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "1"
+
+[node name="TextureRect2" type="TextureRect" parent="Head/CanvasLayer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("8_euj5j")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Head/CanvasLayer/HBoxContainer/TextureRect2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "2
+"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"

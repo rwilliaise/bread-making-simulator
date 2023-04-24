@@ -4,6 +4,13 @@ class_name ComponentLibrary
 @export var HOVER_MATERIAL: Material
 
 @export var STRUCTURAL: PackedScene
+@export var SYNTHESIZER: PackedScene
+
+@onready
+var HOTBAR = {
+	KEY_1: STRUCTURAL,
+	KEY_2: SYNTHESIZER
+}
 
 @onready var CAST := $Cast
 @onready var CAMERA := $Camera
@@ -11,7 +18,7 @@ class_name ComponentLibrary
 @onready var VIEWPORT_CONTAINER = $CanvasLayer/SubViewportContainer
 @onready var VIEWPORT_CAMERA := $CanvasLayer/SubViewportContainer/SubViewport/ViewportCamera
 
-@onready var selected = STRUCTURAL
+@onready var selected = SYNTHESIZER
 @onready var selected_preview = selected.instantiate()
 
 var _hovered: Array[GeometryInstance3D] = []
@@ -26,15 +33,14 @@ func _clear_hovered():
 func _try_hover():
 	_clear_hovered()
 	if CAST.is_colliding() && is_instance_valid(CAST.get_collider()) && CAST.get_collider().is_in_group("component"):
-		for child in CAST.get_collider().get_children():
-			if child is GeometryInstance3D:
-				_hovered.push_back(child)
-				child.material_overlay = HOVER_MATERIAL
+		for child in CAST.get_collider().find_children("*", "GeometryInstance3D", true, false):
+			_hovered.push_back(child)
+			child.material_overlay = HOVER_MATERIAL
 
 func _ready():
 	VIEWPORT.add_child(selected_preview)
 
-func _input(event):
+func _input(event: InputEvent):
 	if event is InputEventMouseMotion && Input.is_action_pressed("component_break"):
 		_try_hover()
 	if Input.is_action_just_pressed("component_place"):
@@ -46,6 +52,15 @@ func _input(event):
 				var component = selected.instantiate()
 				get_tree().current_scene.add_child(component)
 				component.global_position = (CAST.get_collision_point() + CAST.get_collision_normal() * 0.5).round()
+				if "active" in component:
+					component.active = true
+	if event is InputEventKey && Input.is_action_just_pressed("hotbar_select"):
+		if HOTBAR.has(event.keycode):
+			print(event.keycode)
+			selected = HOTBAR[event.keycode]
+			selected_preview.queue_free()
+			selected_preview = selected.instantiate()
+			VIEWPORT.add_child(selected_preview)
 
 func _process(_delta):
 	VIEWPORT_CAMERA.global_transform = CAMERA.global_transform
